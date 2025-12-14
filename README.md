@@ -1,4 +1,3 @@
-
 # Urbanrise Product Analytics (Docker Setup)
 
 A full internal analytics prototype to fetch product data from an API, store it in MongoDB, generate business insights, and predict product rating quality using ML – now fully containerized with Docker.
@@ -58,7 +57,7 @@ docker compose up --build
 docker compose up -d --build
 ```
 
-- `-d` runs containers in the background.  
+- Runs containers in the background.
 
 ### 3️⃣ Stop Containers
 
@@ -89,21 +88,6 @@ docker compose down -v
 - **Services**:
   - `mongo` → MongoDB database, host port 27018, container port 27017  
   - `app` → Streamlit app, depends on `mongo`  
-- Environment variable `DB_URI` is passed to `app` to connect MongoDB inside Docker (`mongodb://mongo:27017/`)  
-
----
-
-## 🔹 Update `db_manager.py` for Docker
-
-```python
-import os
-
-DB_URI = os.getenv("DB_URI", "mongodb://localhost:27017/")
-DB_NAME = "urbanrise_analytics"
-COLLECTION_NAME = "products"
-```
-
-- This ensures the app connects to MongoDB inside Docker.  
 
 ---
 
@@ -112,7 +96,7 @@ COLLECTION_NAME = "products"
 1. **Fetch Data from API** → Pull products from DummyJSON API and store in MongoDB.  
 2. **Train Model** → Train ML model to predict high-rated products.  
 3. **Business Insights Tab** → Explore charts for price, rating, stock risk, and discount strategy.  
-4. **Prediction Tab** → Input `price`, `discount %`, `stock` to predict rating quality.  
+4. **Prediction Tab** → Input `price`, `discount %`, `stock` to predict rating quality.
 
 ---
 
