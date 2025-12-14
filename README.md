@@ -48,8 +48,8 @@ In project root, run:
 docker compose up --build
 ```
 
-- This builds the Streamlit app image and starts MongoDB.  
-- Streamlit app will be available at [http://localhost:8501](http://localhost:8501).
+- Builds the Streamlit app image and starts MongoDB.  
+- Streamlit app will be available at [http://localhost:8501](http://localhost:8501).  
 - MongoDB is mapped to host port **27018** to avoid conflicts with local MongoDB.
 
 ### 2️⃣ Run in Detached Mode
@@ -67,7 +67,7 @@ docker compose down
 ```
 
 - Stops and removes containers.  
-- Add `-v` to also remove volumes (optional):  
+- Add `-v` to also remove volumes (optional):
 
 ```bash
 docker compose down -v
@@ -75,7 +75,7 @@ docker compose down -v
 
 ---
 
-## 🔹 Notes on Docker Configuration
+## 🔹 Docker Configuration Notes
 
 ### Dockerfile
 
@@ -87,12 +87,23 @@ docker compose down -v
 ### docker-compose.yml
 
 - **Services**:
-  - `mongo` → MongoDB database, host port 27018, container port 27017
+  - `mongo` → MongoDB database, host port 27018, container port 27017  
   - `app` → Streamlit app, depends on `mongo`  
 - Environment variable `DB_URI` is passed to `app` to connect MongoDB inside Docker (`mongodb://mongo:27017/`)  
 
+---
 
+## 🔹 Update `db_manager.py` for Docker
 
+```python
+import os
+
+DB_URI = os.getenv("DB_URI", "mongodb://localhost:27017/")
+DB_NAME = "urbanrise_analytics"
+COLLECTION_NAME = "products"
+```
+
+- This ensures the app connects to MongoDB inside Docker.  
 
 ---
 
@@ -103,9 +114,11 @@ docker compose down -v
 3. **Business Insights Tab** → Explore charts for price, rating, stock risk, and discount strategy.  
 4. **Prediction Tab** → Input `price`, `discount %`, `stock` to predict rating quality.  
 
-
 ---
 
+## 🔹 Troubleshooting
+
+- **Check Docker Compose version**:
 
 ```bash
 docker compose version
@@ -117,4 +130,10 @@ docker compose version
 docker compose logs -f
 ```
 
+- **Port conflicts** → MongoDB host port is 27018, adjust if needed in `docker-compose.yml`.
 
+---
+
+## 🔹 License
+
+MIT License – Free for internal prototyping and learning.
