@@ -38,15 +38,8 @@ class ProductRatingModel:
         )
 
         if self.algorithm == "LogisticRegression":
-            param_grid = {
-                "C": [0.01, 0.1, 1, 10],
-                "penalty": ["l2"],
-                "solver": ["lbfgs"]
-            }
-            base_model = LogisticRegression(max_iter=1000)
-            grid = GridSearchCV(base_model, param_grid, cv=5, scoring="accuracy")
-            grid.fit(X_train, y_train)
-            self.model = grid.best_estimator_
+            self.model = LogisticRegression()
+            self.model.fit(X_train, y_train)
 
         elif self.algorithm == "RandomForest":
             param_grid = {
