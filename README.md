@@ -118,6 +118,107 @@ docker compose logs -f
 
 ---
 
+
+
+
+## 🔄 End-to-End Flow
+
+### 1️⃣ API Ingestion
+
+-   Product data is fetched from **DummyJSON API**
+-   Data is stored in **MongoDB** for reuse and faster access
+
+---
+
+### 2️⃣ Data Processing
+
+#### 📦 Business Category Mapping
+
+Products are grouped into the following business categories using
+rule-based mapping:
+
+-   **Electronics**
+-   **Home & Living**
+-   **Fashion**
+-   **Beauty**
+-   **Daily Essentials**
+-   **Others** (fallback for unmapped categories)
+
+#### 💰 Price Segmentation
+
+Products are segmented by price:
+
+-   **Budget** → price ≤ 2000\
+-   **Premium** → price \> 2000
+
+---
+
+### 3️⃣ Business Insights
+
+The system generates insights such as:
+
+-   ⭐ Rating distribution by **price segment**
+-   🏷️ High-rated product contribution by **business category**
+-   📊 Stock and discount-based performance insights
+
+These insights help understand pricing strategy, inventory impact, and
+customer preferences.
+
+---
+
+### 4️⃣ Machine Learning
+
+#### 🎯 Problem Statement
+
+Predict whether a product is **High Rated**.
+
+-   **Target Variable**
+    -   `High Rated = 1` if rating ≥ 4.0
+    -   `Low Rated = 0` if rating \< 4.0
+
+#### 🧩 Features Used
+
+-   `price`
+-   `discountPercentage`
+-   `stock`
+
+#### 🤖 Models Implemented
+
+-   Logistic Regression
+-   Random Forest Classifier
+-   Gradient Boosting Classifier
+
+#### 📐 Evaluation Metric
+
+-   **Accuracy**
+
+---
+
+### 5️⃣ Prediction UI
+
+A simple prediction interface allows users to:
+
+1.  Input:
+    -   Price
+    -   Discount Percentage
+    -   Stock Quantity
+2.  Receive:
+    -   Predicted Rating Class (**High / Low Rated**)
+    -   Confidence score
+
+---
+
+## ⚖️ Assumptions & Trade-offs
+
+-   Category mapping is **rule-based** with an `"Others"` fallback
+-   Price threshold of **2000** is a business heuristic
+-   Limited features result in **moderate model accuracy**
+-   Prototype prioritizes **clarity and learning** over production
+    scalability
+
+---
+
+
 ## 🔹 License
 
 MIT License – Free for internal prototyping and learning.
