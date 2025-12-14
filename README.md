@@ -33,7 +33,7 @@ project_root/
 1. Clone the repository:
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/studybhanu/urbanrise-analytics
 cd project_root
 ```
 
