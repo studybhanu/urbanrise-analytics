@@ -1,10 +1,12 @@
 import pymongo
 import pandas as pd
+import os
 
 # Configuration
-DB_URI = "mongodb://localhost:27017/"
+DB_URI = os.getenv("DB_URI", "mongodb://localhost:27017/")
 DB_NAME = "urbanrise_analytics"
 COLLECTION_NAME = "products"
+
 
 def get_collection():
     """Establishes connection and returns the MongoDB collection."""
