@@ -91,19 +91,8 @@ docker compose down -v
   - `app` → Streamlit app, depends on `mongo`  
 - Environment variable `DB_URI` is passed to `app` to connect MongoDB inside Docker (`mongodb://mongo:27017/`)  
 
----
 
-## 🔹 Update `db_manager.py` for Docker
 
-```python
-import os
-
-DB_URI = os.getenv("DB_URI", "mongodb://localhost:27017/")
-DB_NAME = "urbanrise_analytics"
-COLLECTION_NAME = "products"
-```
-
-- This ensures the app connects to MongoDB inside Docker.  
 
 ---
 
@@ -114,21 +103,9 @@ COLLECTION_NAME = "products"
 3. **Business Insights Tab** → Explore charts for price, rating, stock risk, and discount strategy.  
 4. **Prediction Tab** → Input `price`, `discount %`, `stock` to predict rating quality.  
 
----
-
-## 🔹 Notes
-
-- MongoDB container uses persistent volume `mongo_data`.  
-- Default host ports:
-  - Streamlit → `8501`  
-  - MongoDB → `27018` (host) → `27017` (container)  
 
 ---
 
-## 🔹 Troubleshooting
-
-- **Port conflicts** → Already solved by using host port 27018 for MongoDB.  
-- **Docker Compose errors (`ContainerConfig`)** → Upgrade Docker Compose to v2.x  
 
 ```bash
 docker compose version
@@ -140,8 +117,4 @@ docker compose version
 docker compose logs -f
 ```
 
----
 
-## 🔹 License
-
-MIT License – Free for internal prototyping and learning.
